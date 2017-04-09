@@ -12,7 +12,7 @@ export class EventBusExperimentsComponent implements OnInit {
 
     ngOnInit() {
 
-        console.log('Top level component broadcasted all lessons ...');
+        console.log('EventBusExperimentsComponent broadcasted all lessons ...');
 
         store.initializeLessonsList(testLessons.slice(0));
 
