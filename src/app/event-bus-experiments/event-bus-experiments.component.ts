@@ -1,42 +1,35 @@
-import {Component, OnInit} from '@angular/core';
-import {globalEventBus, LESSONS_LIST_AVAILABLE, ADD_NEW_LESSON} from "./event-bus";
-import {testLessons} from "../shared/model/test-lessons";
-import {Lesson} from "../shared/model/lesson";
+import { Component, OnInit } from '@angular/core';
+import { store } from "./app-data";
+import { testLessons } from "../shared/model/test-lessons";
+import { Lesson } from "../shared/model/lesson";
 
 @Component({
-    selector: 'event-bus-experiments',
-    templateUrl: './event-bus-experiments.component.html',
-    styleUrls: ['./event-bus-experiments.component.css']
+  selector: 'event-bus-experiments',
+  templateUrl: './event-bus-experiments.component.html',
+  styleUrls: ['./event-bus-experiments.component.css']
 })
 export class EventBusExperimentsComponent implements OnInit {
 
-    private lessons: Lesson[] = [];
+  ngOnInit() {
+    console.log('Top level component broadcasted all lessons ...');
 
-    ngOnInit() {
+    store.initializeLessonsList(testLessons.slice(0));
 
-        console.log('Top level component broadcasted all lessons ...');
+    setTimeout(() => {
+      const neeLesson = {
+        id: Math.random(),
+        description: 'New lesson arriving from the backend'
+      };
 
-        this.lessons = testLessons.slice(0);
+      //TODO
 
-        globalEventBus.notifyObservers(LESSONS_LIST_AVAILABLE,
-            this.lessons);
+    }, 10000);
 
-        setTimeout(() => {
+  }
 
-            this.lessons.push({
-                id: Math.random(),
-                description: 'New lesson arriving from the backend'
-            });
-
-            globalEventBus.notifyObservers(LESSONS_LIST_AVAILABLE, this.lessons);
-
-        }, 10000);
-
-    }
-
-    addLesson(lessonText: string) {
-        globalEventBus.notifyObservers(ADD_NEW_LESSON, lessonText);
-    }
+  addLesson(lessonText: string) {
+    //TODO
+  }
 
 }
 
