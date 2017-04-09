@@ -18,7 +18,8 @@ export class EventBusExperimentsComponent implements OnInit {
     setTimeout(() => {
       const newLesson = {
         id: Math.random(),
-        description: 'New lesson arriving from the backend'
+        description: 'New lesson arriving from the backend',
+        duration: '3:00'
       };
 
       store.addLesson(newLesson)
@@ -29,11 +30,12 @@ export class EventBusExperimentsComponent implements OnInit {
 
   addLesson(lessonText: string) {
     const newLesson = {
-        id: Math.random(),
-        description: lessonText
-      };
+      id: Math.random(),
+      description: lessonText,
+      duration: '3:00'
+    };
 
-      store.addLesson(newLesson)
+    store.addLesson(newLesson)
   }
 
 }
