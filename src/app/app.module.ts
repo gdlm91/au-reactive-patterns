@@ -8,11 +8,12 @@ import { EventBusExperimentsComponent } from './event-bus-experiments/event-bus-
 import { LessonsListComponent } from './lessons-list/lessons-list.component';
 import { LessonsCounterComponent } from './lessons-counter/lessons-counter.component';
 import { HomeComponent } from './home/home.component';
-import {firebaseConfig} from "../environments/firebase.config";
-import {AngularFireModule} from 'angularfire2';
-import {RouterModule} from '@angular/router';
-import {routerConfig} from "./router.config";
+import { firebaseConfig } from "../environments/firebase.config";
+import { AngularFireModule } from 'angularfire2';
+import { RouterModule } from '@angular/router';
+import { routerConfig } from "./router.config";
 import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { CoursesService } from './services/courses.service'
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
     AngularFireModule.initializeApp(firebaseConfig),
     RouterModule.forRoot(routerConfig),
   ],
-  providers: [],
+  providers: [CoursesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
