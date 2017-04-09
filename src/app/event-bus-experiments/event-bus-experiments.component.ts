@@ -16,19 +16,24 @@ export class EventBusExperimentsComponent implements OnInit {
     store.initializeLessonsList(testLessons.slice(0));
 
     setTimeout(() => {
-      const neeLesson = {
+      const newLesson = {
         id: Math.random(),
         description: 'New lesson arriving from the backend'
       };
 
-      //TODO
+      store.addLesson(newLesson)
 
     }, 10000);
 
   }
 
   addLesson(lessonText: string) {
-    //TODO
+    const newLesson = {
+        id: Math.random(),
+        description: lessonText
+      };
+
+      store.addLesson(newLesson)
   }
 
 }
