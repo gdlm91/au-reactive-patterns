@@ -7,10 +7,12 @@ import { Lesson } from "../shared/model/lesson";
   templateUrl: './lessons-counter.component.html',
   styleUrls: ['./lessons-counter.component.css']
 })
-export class LessonsCounterComponent implements Observer {
+export class LessonsCounterComponent implements Observer, OnInit {
   lessonsCounter = 0;
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit() {
     console.log('lesson list component is registered as observer ..');
     store.lessonsList$.subscribe(this);
   }
