@@ -8,19 +8,20 @@ import { EventBusExperimentsComponent } from './event-bus-experiments/event-bus-
 import { LessonsListComponent } from './lessons-list/lessons-list.component';
 import { LessonsCounterComponent } from './lessons-counter/lessons-counter.component';
 import { HomeComponent } from './home/home.component';
-import {firebaseConfig} from "../environments/firebase.config";
-import {AngularFireModule} from 'angularfire2';
-import {RouterModule} from '@angular/router';
-import {routerConfig} from "./router.config";
+import { firebaseConfig } from "../environments/firebase.config";
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { RouterModule } from '@angular/router';
+import { routerConfig } from "./router.config";
 import { CourseDetailComponent } from './course-detail/course-detail.component';
-import {CoursesService} from "./services/courses.service";
+import { CoursesService } from "./services/courses.service";
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseDetailHeaderComponent } from './course-detail-header/course-detail-header.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
-import {NewsletterService} from "./services/newsletter.service"; 
+import { NewsletterService } from "./services/newsletter.service";
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { LoginComponent } from './login/login.component';
-import {UserService} from "./services/user.service";
+import { UserService } from "./services/user.service";
 
 @NgModule({
   declarations: [
@@ -42,12 +43,13 @@ import {UserService} from "./services/user.service";
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
     RouterModule.forRoot(routerConfig),
   ],
   providers: [
-      CoursesService,
-      NewsletterService,
-      UserService
+    CoursesService,
+    NewsletterService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
