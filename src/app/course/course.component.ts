@@ -30,15 +30,24 @@ export class CourseComponent implements OnInit, OnDestroy {
         this.course$ = this.coursesService.findCourseById(this.id);
         this.lessons$ = this.lessonsPager.lessonsPage$;
 
-        this.lessonsPager.loadFirstPage(this.id);
+        this.lessonsPager.loadFirstPage(this.id).subscribe(
+            () => {},
+            error => alert('error loading the first page')
+        );
     }
 
     previousLessonsPage() {
-        this.lessonsPager.previous();
+        this.lessonsPager.previous().subscribe(
+            () => {},
+            error => alert('error loading the previous page')
+        );
     }
 
     nextLessonsPage() {
-        this.lessonsPager.next();
+        this.lessonsPager.next().subscribe(
+            () => {},
+            error => alert('error loading the next page')
+        );
     }
 
     selectDetail(lesson:Lesson) {
