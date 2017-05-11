@@ -1,15 +1,16 @@
-import {Component, OnInit, Input, OnDestroy} from '@angular/core';
-import {Observable} from "rxjs";
-import {Lesson} from "../shared/model/lesson";
-import {CoursesHttpService} from "../services/courses-http.service";
-import {Course} from "../shared/model/course";
-import {LessonsPagerService} from "../services/lessons-pager.service";
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Observable } from "rxjs";
+import { Lesson } from "../shared/model/lesson";
+import { CoursesHttpService } from "../services/courses-http.service";
+import { Course } from "../shared/model/course";
+import { LessonsPagerService } from "../services/lessons-pager.service";
+import { MessagesService } from "../services/messages.service";
 
 @Component({
     selector: 'course',
     templateUrl: './course.component.html',
     styleUrls: ['./course.component.css'],
-    providers: [LessonsPagerService]
+    providers: [LessonsPagerService, MessagesService]
 })
 export class CourseComponent implements OnInit, OnDestroy {
 
@@ -21,36 +22,37 @@ export class CourseComponent implements OnInit, OnDestroy {
 
     detail$: Observable<Lesson>;
 
-    constructor(private coursesService: CoursesHttpService,
-                private lessonsPager:LessonsPagerService) {
-
-    }
+    constructor(
+        private coursesService: CoursesHttpService,
+        private lessonsPager: LessonsPagerService,
+        private messagesService: MessagesService
+    ) { }
 
     ngOnInit() {
         this.course$ = this.coursesService.findCourseById(this.id);
         this.lessons$ = this.lessonsPager.lessonsPage$;
 
         this.lessonsPager.loadFirstPage(this.id).subscribe(
-            () => {},
-            error => alert('error loading the first page')
+            () => { },
+            error => this.messagesService.error('error loading the first page')
         );
     }
 
     previousLessonsPage() {
         this.lessonsPager.previous().subscribe(
-            () => {},
-            error => alert('error loading the previous page')
+            () => { },
+            error => this.messagesService.error('error loading the previous page')
         );
     }
 
     nextLessonsPage() {
         this.lessonsPager.next().subscribe(
-            () => {},
-            error => alert('error loading the next page')
+            () => { },
+            error => this.messagesService.error('error loading the next page')
         );
     }
 
-    selectDetail(lesson:Lesson) {
+    selectDetail(lesson: Lesson) {
         this.detail$ = this.coursesService.findLessonDetailById(lesson.url);
     }
 
